@@ -23,13 +23,37 @@
   "eslintConfig": {
     "root": true,
     "env": {
+      "browser": true,
       "node": true
     },
     "extends": [
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "vars-on-top": 2,
+      "no-console": 0,
+      "indent": [
+        2,
+        4
+      ],
+      "no-multiple-empty-lines": 2,
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi-spacing": [
+        "error",
+        {
+          "before": false,
+          "after": true
+        }
+      ],
+      "semi": [
+        2,
+        "always"
+      ]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
