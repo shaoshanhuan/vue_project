@@ -39,6 +39,7 @@
       "eslint:recommended"
     ],
     "rules": {
+      "vue/no-parsing-error" : 0,
       "vars-on-top": 2,
       "no-console": 0,
       "indent": [
