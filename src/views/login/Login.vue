@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import router from '../../router.js';
 export default {
     data(){
         return {
@@ -36,11 +37,18 @@ export default {
         };
     },
     methods: {
-        loginHandler(){
-            this.$http.post('login',{
+        async loginHandler(){
+            // 发出POST请求到login接口，将username和password带向服务器
+            const {result} = await this.$http.post('login',{
                 'username' : this.form.username,
                 'password' : this.form.password
-            })
+            }).then(data=>data.data);
+            if(result == 1){
+                // 登陆成功
+                router.push({'name':'index'});
+            }else{
+                this.$Message.error('用户名或密码错误');
+            }
         }
     }
 };

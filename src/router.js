@@ -6,7 +6,7 @@ import store from './store/index.js';
 // 路由的实例化
 const router = new VueRouter({
     routes : [
-        { path: '/', component: Index },
+        { path: '/', component: Index, name:'index'},
         { path: '/login', component: Login, name:'login' }
     ]
 });
