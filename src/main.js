@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 
 import App from './App.vue';
 import routes from './routes.js';
+import http from './utils/http.js';
 
 // Vue-Cli自带的配置，不用管
 Vue.config.productionTip = false;
@@ -12,6 +13,8 @@ Vue.config.productionTip = false;
 Vue.use(VueRouter);
 // 使用UI插件
 Vue.use(iView);
+// 将http对象写在Vue的原型上
+Vue.prototype.$http = http;
 
 // 路由的实例化
 const router = new VueRouter({

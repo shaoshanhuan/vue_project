@@ -7,8 +7,13 @@
 </template>
 
 <script>
+import Vue from 'vue';
 export default {
-    
+    created(){
+        Vue.prototype.$http.get('/api').then(data=>{
+            alert(data.data.a);
+        });
+    }
 };
 </script>
 
