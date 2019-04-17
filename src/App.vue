@@ -3,17 +3,3 @@
         <router-view></router-view>
     </div>
 </template>
-
-<script>
-export default {
-    created(){
-         
-    }
-};
-</script>
-
-<style lang="less" scoped>
-    h1{
-        color:red;
-    }
-</style>

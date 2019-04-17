@@ -39,7 +39,7 @@ export default {
     methods: {
         async loginHandler(){
             // 发出POST请求到login接口，将username和password带向服务器
-            const {result} = await this.$http.post('login',{
+            const {result} = await this.$http.post('login', {
                 'username' : this.form.username,
                 'password' : this.form.password
             }).then(data=>data.data);
