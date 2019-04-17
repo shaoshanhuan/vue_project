@@ -12,7 +12,8 @@
     "core-js": "^2.6.5",
     "iview": "^3.4.0",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.5"
+    "vue-router": "^3.0.5",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",
@@ -59,6 +60,13 @@
       "semi": [
         2,
         "always"
+      ],
+      "comma-spacing": [ 
+        2,
+        {
+          "before": false,
+          "after": true
+        }
       ]
     },
     "parserOptions": {
