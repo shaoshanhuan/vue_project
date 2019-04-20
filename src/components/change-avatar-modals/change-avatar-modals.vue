@@ -3,15 +3,34 @@
         <Modal
             :value="$changeAvatarModel.isShow"
             title="更改您的头像"
-            @on-ok="ok"
             @on-cancel="cancel"
+            :width="modalWidth"
         >
-            <Step1 v-if="step == 1" :changeFile="changeFile" :changeStep="changeStep"></Step1>
-            <Step2 v-if="step == 2" :file="file" :changeStep="changeStep" :changePicname="changePicname"></Step2>
-            <Step3 v-if="step == 3" :picname="picname"></Step3>
+            <Step1 
+                v-if="step == 1" 
+                :changeFile="changeFile" 
+                :changeStep="changeStep"
+            ></Step1>
+
+            <Step2 
+                v-if="step == 2" 
+                :file="file" 
+                :changeStep="changeStep" 
+                :changePicname="changePicname" 
+                :changePicRealWH="changePicRealWH"
+            ></Step2>
+
+            <Step3 
+                v-if="step == 3" 
+                :picname="picname" 
+                :picRealWidth="picRealWidth" 
+                :picRealHeight="picRealHeight" 
+                :changeModalWidth="changeModalWidth"
+            ></Step3>
             
             <div slot="footer">
                 <Button @click="cancel">取消</Button>
+                <Button v-show="step == 3" type="primary">确定</Button>
             </div>
         </Modal>
     </div>
@@ -27,7 +46,10 @@ export default {
         return {
             step : 1,
             file : null,
-            picname : ''
+            picname : '',
+            picRealWidth : 0,
+            picRealHeight : 0,
+            modalWidth : 600
         }
     },
     methods:{
@@ -41,14 +63,18 @@ export default {
         changePicname(picname){
             this.picname = picname;
         },
-        ok(){
-            this.$changeAvatarModel.hide();
-
+        changePicRealWH(w,h){
+            this.picRealWidth = w;
+            this.picRealHeight = h;
+        },
+        changeModalWidth(w){
+            this.modalWidth = w;
         },
         cancel(){
             this.$changeAvatarModel.hide();
             this.step = 1;
             this.file = null;
+            this.modalWidth = 600;
         }
     },
     components:{

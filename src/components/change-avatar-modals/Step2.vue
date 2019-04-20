@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    props : ['file','changeStep','changePicname'],
+    props : ['file','changeStep','changePicname','changePicRealWH'],
     data() {
         return {
             percent: 0
@@ -35,6 +35,8 @@ export default {
                 }else if(obj.result == 1){
                     // 改变picname
                     self.changePicname(obj.filename);
+                    // 改变宽度和高度
+                    self.changePicRealWH(obj.width,obj.height);
                     self.changeStep(3);
                 }
             }
