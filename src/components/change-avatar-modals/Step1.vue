@@ -11,10 +11,10 @@
                     1) 上传图片要小于200kb
                 </p>
                 <p>
-                    2) 支持jpg、png图片上传，不支持psd
+                    2) 仅支持jpg、png图片格式上传
                 </p>
                 <p>
-                    3) 上传图片我们提供裁切功能
+                    3) 图片最小宽度、高度是100px；最大宽度、高度为1500px
                 </p>
             </Col>
         </Row>
@@ -23,6 +23,7 @@
 
 <script>
 export default {
+    props : ['changeFile','changeStep'],
     methods:{
         chooseImageBtnHandler(){
             // 模拟鼠标事件对象
@@ -32,9 +33,13 @@ export default {
             // 派遣事件
             this.$refs.file.dispatchEvent(evt);
         },
-        changeHandler(){
+        changeHandler(e){
             // 这里面干嘛？？
-            
+            // 这里产出一个file文件对象，这个组件不负责上传，而是交给step2上传
+            // 调用父亲的函数
+            this.changeFile(e.target.files[0]);
+            // 改为第2个组件登场
+            this.changeStep(2);
         }
     }
 }

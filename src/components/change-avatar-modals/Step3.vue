@@ -1,12 +1,12 @@
 <template>
     <div>
-        <h1>我是第3步</h1>
+        <img :src="`/api/uploads/${picname}`" >
     </div>
 </template>
 
 <script>
 export default {
-    
+    props:['picname']
 }
 </script>
 

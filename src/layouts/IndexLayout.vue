@@ -83,7 +83,7 @@ export default {
         overflow: hidden;
     }
     .ivu-layout-header{
-        background:-webkit-linear-gradient(left, #3de1b4, #41f695 20%, #21d5dd);
+        background:-webkit-linear-gradient(left, #146d54, #20a75e 20%, #064f52);
         .ivu-menu-dark{
             background:none;
         }
