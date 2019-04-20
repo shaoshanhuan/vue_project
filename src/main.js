@@ -6,6 +6,7 @@ import App from './App.vue';
 import router from './router.js';
 import http from './utils/http.js';
 import store from './store/index.js';
+import changeAvatarModalControl from './bus/changeAvatarModalControl.js';
 
 // Vue-Cli自带的配置，不用管
 Vue.config.productionTip = false;
@@ -14,6 +15,8 @@ Vue.config.productionTip = false;
 Vue.use(VueRouter);
 // 使用UI插件
 Vue.use(iView);
+// 使用头像管理插件（自己编写的）
+Vue.use(changeAvatarModalControl);
 
 // 将http对象写在Vue的原型上
 Vue.prototype.$http = http;

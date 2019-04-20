@@ -19,7 +19,7 @@ export default {
         }
     },
     actions: {
-        async checkMe({commit}) {
+        async checkMe({ commit }) {
             const resultObj = await Vue.prototype.$http.get('/me').then(data => data.data);
             // console.log(resultObj);
             // 没有登陆
@@ -28,11 +28,11 @@ export default {
                 return;
             }
             // 解构
-            const {nickname, username, avatar} = resultObj;
+            const { nickname, username, avatar } = resultObj;
             // 上跳
-            commit('changeNickname', {nickname});
-            commit('changeUsername', {username});
-            commit('changeAvatar', {avatar});
+            commit('changeNickname', { nickname });
+            commit('changeUsername', { username });
+            commit('changeAvatar', { avatar });
         }
     }
 };

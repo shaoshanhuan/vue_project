@@ -14,7 +14,7 @@
                             </span>
                             <ul slot="content">
                                 <li>
-                                    <a href="">更改头像</a>
+                                    <a href="javascript:;" @click="showModel">更改头像</a>
                                 </li>
                                 <li>
                                     <a href="">我的信息</a>
@@ -65,11 +65,16 @@ export default {
         avatar(){
             return this.$store.state.me.avatar;
         }
+    },
+    methods:{
+        showModel(){
+            this.$changeAvatarModel.show();
+        }
     }
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     .layout{
         border: 1px solid #d7dde4;
         background: #f5f7f9;
@@ -108,6 +113,9 @@ export default {
         span{
             color:white;
         }
+        .ivu-poptip-body{
+            padding:2px;
+        }
         ul{
             list-style:none;
 
@@ -115,9 +123,15 @@ export default {
                 font-size:16px;
                 line-height: 24px;
                 border-bottom:1px dotted #eee;
-                padding:10px 0;
+                padding:10px 6px;
                 a{
                     color:#333;
+                    display: block;
+                    height:30px;
+                    line-height: 30px;
+                    &:hover{
+                        background:#eee;
+                    }
                 }
             }
         }

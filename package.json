@@ -39,7 +39,7 @@
       "eslint:recommended"
     ],
     "rules": {
-      "vue/no-parsing-error" : 0,
+      "vue/no-parsing-error": 0,
       "vars-on-top": 2,
       "no-console": 0,
       "indent": [
@@ -62,7 +62,7 @@
         2,
         "always"
       ],
-      "comma-spacing": [ 
+      "comma-spacing": [
         2,
         {
           "before": false,
