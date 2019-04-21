@@ -17,7 +17,7 @@
                                     <a href="javascript:;" @click="showModel">更改头像</a>
                                 </li>
                                 <li>
-                                    <a href="">我的信息</a>
+                                    <a href="javascript:;" @click="showDrawer">我的信息</a>
                                 </li>
                                 <li>
                                     <a href="">充值</a>
@@ -69,6 +69,9 @@ export default {
     methods:{
         showModel(){
             this.$changeAvatarModel.show();
+        },
+        showDrawer(){
+            this.$changeProfileDrawer.show();
         }
     }
 };

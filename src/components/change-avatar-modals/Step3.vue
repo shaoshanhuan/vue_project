@@ -73,7 +73,7 @@
 
 <script>
 export default {
-    props:['picname','picRealWidth','picRealHeight','changeModalWidth'],
+    props:['picname', 'picRealWidth', 'picRealHeight', 'changeModalWidth'],
     data(){
         return {
             // 图片的显示宽度和高度
@@ -85,7 +85,7 @@ export default {
             // cut这框的宽度、高度
             cW : 100,
             cH : 100
-        }
+        };
     },
     computed:{
         
@@ -104,6 +104,10 @@ export default {
     },
     // 组件所有DOM就绪。
     mounted(){
+        var $ = null;
+        var self = this;
+        // 已经加载好的数量
+        var doneCount = 0;
         // 动态加载jQuery库
         var scriptDOM1 = document.createElement('script');
         var scriptDOM2 = document.createElement('script');
@@ -117,9 +121,7 @@ export default {
         document.body.appendChild(scriptDOM1);
         document.body.appendChild(scriptDOM3);
 
-        var self = this;
-        // 已经加载好的数量
-        var doneCount = 0;
+        
         // 加载好库之后，计数器加1，如果计数器是2了，表示都好了
         scriptDOM1.onload = function(){
             doneCount++;
@@ -128,19 +130,20 @@ export default {
             }
             // 因为jQueryUI必须等jQuery加载完毕再加载，所以放到回调里面
             document.body.appendChild(scriptDOM2);
-        }
+            $ = window.$;
+        };
         scriptDOM2.onload = function(){
             doneCount++;
             if(doneCount == 3){
                 start();
             }
-        }
+        };
         scriptDOM3.onload = function(){
             doneCount++;
             if(doneCount == 3){
                 start();
             }
-        }
+        };
 
         function start(){
             // 拖拽
@@ -148,7 +151,7 @@ export default {
                 // 限制范围
                 containment : 'parent',
                 // 当拖拽的时候做的事情
-                drag(event,ui){
+                drag(event, ui){
                     self.dX = -ui.position.left;
                     self.dY = -ui.position.top;
                 }
@@ -161,14 +164,14 @@ export default {
                 // 限制比例为方形
                 aspectRatio: 1,
                 // 当用户改变尺寸的时候做的事情
-                resize(event,ui){
+                resize(event, ui){
                     self.cW = ui.size.width;
                     self.cH = ui.size.height;
                 }
             });
         }
     }
-}
+};
 </script>
 
 <style lang="less" scoped>

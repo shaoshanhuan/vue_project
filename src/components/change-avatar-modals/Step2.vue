@@ -7,22 +7,25 @@
 
 <script>
 export default {
-    props : ['file','changeStep','changePicname','changePicRealWH'],
+    props : ['file', 'changeStep', 'changePicname', 'changePicRealWH'],
     data() {
         return {
             percent: 0
-        }
+        };
     },
     created(){
+        // 上传进度
+        var self = this;
         // 创建虚拟表单
         var form = new FormData();
+        var xhr = new XMLHttpRequest();
         // 追加文件
         form.append('file', this.file);
         // Ajax的语法 
-        var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(){
+            var obj = null;
             if(xhr.readyState == 4){
-                var obj = JSON.parse(xhr.responseText)
+                obj = JSON.parse(xhr.responseText);
                 if(obj.result == -2){
                     self.$Message.warning('文件尺寸过大，请重新选择图片上传');
                     self.changeStep(1);
@@ -36,20 +39,20 @@ export default {
                     // 改变picname
                     self.changePicname(obj.filename);
                     // 改变宽度和高度
-                    self.changePicRealWH(obj.width,obj.height);
+                    self.changePicRealWH(obj.width, obj.height);
                     self.changeStep(3);
                 }
             }
-        }
-        // 上传进度
-        var self = this;
+        };
+       
         xhr.upload.onprogress = function(e){
             self.percent = e.loaded / e.total * 100;
-        }
-        xhr.open('POST','/api/uploadavatar',true);
+        };
+
+        xhr.open('POST', '/api/uploadavatar', true);
         xhr.send(form);
     }
-}
+};
 </script>
 
 <style lang="less" scoped>

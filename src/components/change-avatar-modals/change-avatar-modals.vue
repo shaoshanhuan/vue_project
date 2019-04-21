@@ -45,13 +45,13 @@ import Step3 from './Step3.vue';
 export default {
     data(){
         return {
-            step : 1,
-            file : null,
-            picname : '',
-            picRealWidth : 0,
-            picRealHeight : 0,
-            modalWidth : 600
-        }
+            step: 1,
+            file: null,
+            picname: '',
+            picRealWidth: 0,
+            picRealHeight: 0,
+            modalWidth: 600
+        };
     },
     methods:{
         // 改变文件
@@ -64,7 +64,7 @@ export default {
         changePicname(picname){
             this.picname = picname;
         },
-        changePicRealWH(w,h){
+        changePicRealWH(w, h){
             this.picRealWidth = w;
             this.picRealHeight = h;
         },
@@ -93,14 +93,15 @@ export default {
             const filename = this.$refs.step3.picname;
             
 
-            const {result} = await this.$http.post('/cutavatarandsetavatar' , {cW,dX,dY,picRealWidth,picShowWidth,filename}).then(data=>data.data);
+            const {result} = await this.$http.post('/cutavatarandsetavatar', {cW, dX, dY, picRealWidth, picShowWidth, filename}).then(data=>data.data);
 
             // 关闭对话框
             if(result == 1){
                 this.$Message.success('更改成功');
-                this.$changeAvatarModel.hide();
                 // 命令me这个store，立即询问数据库，用户的新资料（新资料里面含有用户新头像）
-                this.$store.dispatch("me/checkMe");
+                this.$store.dispatch('me/checkMe');
+                //调用cancel
+                this.cancel();
             }
         }
     },
@@ -109,7 +110,7 @@ export default {
         Step2,
         Step3
     }
-}
+};
 </script>
 
 <style lang="less" scoped>

@@ -23,13 +23,13 @@
 
 <script>
 export default {
-    props : ['changeFile','changeStep'],
+    props : ['changeFile', 'changeStep'],
     methods:{
         chooseImageBtnHandler(){
             // 模拟鼠标事件对象
-            const evt = document.createEvent("MouseEvents");
+            const evt = document.createEvent('MouseEvents');
             // 初始化
-            evt.initMouseEvent("click",false,false);
+            evt.initMouseEvent('click', false, false);
             // 派遣事件
             this.$refs.file.dispatchEvent(evt);
         },
@@ -42,7 +42,7 @@ export default {
             this.changeStep(2);
         }
     }
-}
+};
 </script>
 
 <style lang="less" scoped>
