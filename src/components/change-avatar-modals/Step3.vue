@@ -16,6 +16,10 @@
                     :height="picShowHeight"
                     :style="{'position':'absolute','left':dX + 'px','top' : dY + 'px'}"
                 >
+                <div class="t"></div>
+                <div class="r"></div>
+                <div class="b"></div>
+                <div class="l"></div>
             </div>
         </div>
         <div class="preview_box">
@@ -24,7 +28,13 @@
                     :src="`/api/uploads/${picname}`" 
                     :width="picShowWidth"
                     :height="picShowHeight"
-                    :style="{'position':'absolute','left':dX + 'px','top' : dY + 'px'}"
+                    :style="{
+                        'position':'absolute',
+                        'left': 140 * this.dX / this.cW + 'px',
+                        'top' : 140 * this.dY / this.cH + 'px',
+                        'width' : this.picShowWidth / this.cW * 140 + 'px',
+                        'height': 'auto'
+                    }"
                 >
             </div>
             <div class="zhong">
@@ -32,7 +42,13 @@
                     :src="`/api/uploads/${picname}`" 
                     :width="picShowWidth"
                     :height="picShowHeight"
-                    :style="{'position':'absolute','left':dX + 'px','top' : dY + 'px'}"
+                    :style="{
+                        'position':'absolute',
+                        'left': 100 * this.dX / this.cW + 'px',
+                        'top' : 100 * this.dY / this.cH + 'px',
+                        'width' : this.picShowWidth / this.cW * 100 + 'px',
+                        'height': 'auto'
+                    }"
                 >
             </div>
             <div class="xiao">
@@ -40,7 +56,13 @@
                     :src="`/api/uploads/${picname}`" 
                     :width="picShowWidth"
                     :height="picShowHeight"
-                    :style="{'position':'absolute','left':dX + 'px','top' : dY + 'px'}"
+                    :style="{
+                        'position':'absolute',
+                        'left': 60 * this.dX / this.cW + 'px',
+                        'top' : 60 * this.dY / this.cH + 'px',
+                        'width' : this.picShowWidth / this.cW * 60 + 'px',
+                        'height': 'auto'
+                    }"
                 >
             </div>
         </div>
@@ -57,9 +79,16 @@ export default {
             // 图片的显示宽度和高度
             picShowWidth : this.picRealWidth,
             picShowHeight : this.picRealHeight,
+            // cut这个框在绝对定位，这个dX、dY就是cut这个框的top和left值。
             dX : 0,
-            dY : 0
+            dY : 0,
+            // cut这框的宽度、高度
+            cW : 100,
+            cH : 100
         }
+    },
+    computed:{
+        
     },
     // 组件已经创建
     created(){
@@ -86,7 +115,6 @@ export default {
         scriptDOM3.rel = 'stylesheet';
 
         document.body.appendChild(scriptDOM1);
-        document.body.appendChild(scriptDOM2);
         document.body.appendChild(scriptDOM3);
 
         var self = this;
@@ -98,6 +126,8 @@ export default {
             if(doneCount == 3){
                 start();
             }
+            // 因为jQueryUI必须等jQuery加载完毕再加载，所以放到回调里面
+            document.body.appendChild(scriptDOM2);
         }
         scriptDOM2.onload = function(){
             doneCount++;
@@ -132,7 +162,8 @@ export default {
                 aspectRatio: 1,
                 // 当用户改变尺寸的时候做的事情
                 resize(event,ui){
-                    console.log(ui.size.width , ui.size.height);
+                    self.cW = ui.size.width;
+                    self.cH = ui.size.height;
                 }
             });
         }
@@ -168,8 +199,77 @@ export default {
             height:100px;
             top:0;
             left:0;
-            border:1px solid white;
             overflow: hidden;
+
+            @duration : 30s;
+            .t{
+                position: absolute;
+                height:0;
+                width:2000px;
+                border-top:1px dashed white;
+                top:0;
+                left:0;
+                animation:moveL @duration linear 0s infinite;
+            }
+            .r{
+                position: absolute;
+                height:2000px;
+                width:0px;
+                border-right:1px dashed white;
+                top:0;
+                right:0;
+                animation:moveT @duration linear 0s infinite;
+            }
+            .b{
+                position: absolute;
+                height:0;
+                width:2000px;
+                border-bottom:1px dashed white;
+                left:-1000px;
+                bottom:0;
+                animation:moveR @duration linear 0s infinite;
+            }
+            .l{
+                position: absolute;
+                height:2000px;
+                width:0px;
+                border-left:1px dashed white;
+                top:-1000px;
+                left:0;
+                animation:moveB @duration linear 0s infinite;
+            }
+        }
+    }
+    @keyframes moveL{
+        from {
+            left:0;
+        }
+        to{
+            left:-1000px;
+        }
+    }
+    @keyframes moveT{
+        from {
+            top:0;
+        }
+        to{
+            top:-1000px;
+        }
+    }
+    @keyframes moveR{
+        from {
+            left:-1000px;
+        }
+        to{
+            left:0;
+        }
+    }
+    @keyframes moveB{
+        from {
+            top:-1000px;
+        }
+        to{
+            top:0;
         }
     }
     .preview_box{

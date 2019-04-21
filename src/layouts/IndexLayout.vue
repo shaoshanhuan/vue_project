@@ -8,7 +8,7 @@
                     </div>
                     <div class="user_zone">
                         <Poptip trigger="click">
-                            <Avatar v-if="avatar != ''" :src="'http://127.0.0.1:3000/images/' + avatar" />
+                            <Avatar v-if="avatar != ''" :src="'http://127.0.0.1:3000/' + avatar" />
                             <span>
                                 {{nickname}}
                             </span>

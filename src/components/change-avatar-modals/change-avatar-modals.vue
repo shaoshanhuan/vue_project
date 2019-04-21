@@ -21,6 +21,7 @@
             ></Step2>
 
             <Step3 
+                ref="step3"
                 v-if="step == 3" 
                 :picname="picname" 
                 :picRealWidth="picRealWidth" 
@@ -30,7 +31,7 @@
             
             <div slot="footer">
                 <Button @click="cancel">取消</Button>
-                <Button v-show="step == 3" type="primary">确定</Button>
+                <Button v-show="step == 3" type="primary" @click="okHandler">确定</Button>
             </div>
         </Modal>
     </div>
@@ -75,6 +76,32 @@ export default {
             this.step = 1;
             this.file = null;
             this.modalWidth = 600;
+        },
+        async okHandler(){
+            // 得到6个值
+            // 切片宽度、高度是相同的
+            const cW = Number(this.$refs.step3.cW);
+            // 切片的左上角x位置
+            const dX = Math.abs(Number(this.$refs.step3.dX));
+            // 切片的左上角y位置
+            const dY = Math.abs(Number(this.$refs.step3.dY));
+            // 原图宽度
+            const picRealWidth = Number(this.$refs.step3.picRealWidth);
+            // 显示的图片宽度
+            const picShowWidth = Number(this.$refs.step3.picShowWidth);
+            // 图片的文件名
+            const filename = this.$refs.step3.picname;
+            
+
+            const {result} = await this.$http.post('/cutavatarandsetavatar' , {cW,dX,dY,picRealWidth,picShowWidth,filename}).then(data=>data.data);
+
+            // 关闭对话框
+            if(result == 1){
+                this.$Message.success('更改成功');
+                this.$changeAvatarModel.hide();
+                // 命令me这个store，立即询问数据库，用户的新资料（新资料里面含有用户新头像）
+                this.$store.dispatch("me/checkMe");
+            }
         }
     },
     components:{
