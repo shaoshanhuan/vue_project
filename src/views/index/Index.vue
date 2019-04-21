@@ -2,7 +2,7 @@
     <div>
         <Content style="padding:20px;">   
             <Card>
-                <Button @click="showModel">按我显示弹出层</Button>
+                 
             </Card>
         </Content>
     </div>
