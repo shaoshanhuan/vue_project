@@ -11,6 +11,7 @@
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "iview": "^3.4.0",
+    "solarlunar": "^2.0.7",
     "vue": "^2.6.10",
     "vue-router": "^3.0.5",
     "vuex": "^3.1.0"
@@ -40,7 +41,7 @@
     ],
     "rules": {
       "vue/no-parsing-error": 0,
-      "vars-on-top": 2,
+      "vars-on-top": 0,
       "no-console": 0,
       "indent": [
         2,

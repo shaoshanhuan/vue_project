@@ -109,9 +109,8 @@
 export default {
     created(){
         // 拉取默认数据
-        this.$store.dispatch("profile/loadSomeOneProfile",{"username": this.$store.state.me.username})
-        console.log(this.$store.state.profile.info)
-   },
+        this.$store.dispatch('profile/loadSomeOneProfile', {'username': this.$store.state.me.username});
+    },
     data(){
         const info = this.$store.state.profile.info;
         return {
@@ -132,7 +131,7 @@ export default {
                         trigger: 'blur' 
                     },
                     {
-                        type: "string",
+                        type: 'string',
                         pattern: /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,
                         message: '不合法的身份证号码',
                         trigger: 'blur' 
@@ -140,7 +139,7 @@ export default {
                 ],
                 age : [
                     {
-                        validator (rule,value,callback){
+                        validator (rule, value, callback){
                             if(value < 10 || value > 100){
                                 callback(new Error('请输入10到100的整数'));
                             }else{
@@ -152,20 +151,20 @@ export default {
                 ],
                 nickname : [
                     {
-                        validator : (rule,value,callback) => {
-                            this.$http.get("/checknickname?nickname=" + value + "&username=" + this.username).then(data=>{
-                                if(data.data == "no"){
+                        validator : (rule, value, callback) => {
+                            this.$http.get('/checknickname?nickname=' + value + '&username=' + this.username).then(data=>{
+                                if(data.data == 'no'){
                                     callback();
                                 }else{
                                     callback(new Error('对不起你的名字被占用了，请换一个'));
                                 }
-                            })
+                            });
                         },
                         trigger: 'blur' 
                     }
                 ]
             }
-        }
+        };
     },
     methods: {
         updateAvatarBtnHandler(){
@@ -178,13 +177,13 @@ export default {
                 // 表单没有错误，提交表单
                 if(data){
                     //提交表单
-                    this.$http.post("/profile/" + this.$store.state.me.username , this.form).then(data=>{
+                    this.$http.post('/profile/' + this.$store.state.me.username, this.form).then(data=>{
                         if(data.data.result == 1){
                             self.$changeProfileDrawer.hide();
                             self.$Message.success('修改成功');
-                            self.$store.dispatch("me/checkMe");
+                            self.$store.dispatch('me/checkMe');
                         }
-                    })
+                    });
                 }
             });
         }
@@ -206,24 +205,21 @@ export default {
         age(){
             return this.$store.state.profile.info.age;
         },
-        signature(v){
+        signature(){
             return this.$store.state.profile.info.signature;
         },
-        qq(v){
+        qq(){
             return this.$store.state.profile.info.qq;
         },
-        weixin(v){
+        weixin(){
             return this.$store.state.profile.info.weixin;
         },
-        mobile(v){
+        mobile(){
             return this.$store.state.profile.info.mobile;
         },
-        username(v){
+        username(){
             return this.$store.state.profile.info.username;
-        },
-        nickname(v){
-            return this.$store.state.profile.info.nickname;
-        } 
+        }
     },
     watch: {
         idcard(v){
@@ -249,7 +245,7 @@ export default {
         },
         username(v){
             this.form.username = v;
-        } ,
+        },
         nickname(v){
             this.form.nickname = v;
         } 
