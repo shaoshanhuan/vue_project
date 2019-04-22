@@ -3,7 +3,7 @@ import IndexLayout from './layouts/IndexLayout.vue';
 import Login from './views/login/Login.vue';
 // import Index from './views/index/Index.vue';
 import store from './store/index.js';
-import Canlendar from './views/canlendar/MyCanlendar.vue';
+import Schedule from './views/schedule/Schedule.vue';
 
 // 路由的实例化
 const router = new VueRouter({
@@ -15,8 +15,8 @@ const router = new VueRouter({
                 {
                     path: 'index',
                     // component: Index,
-                    // 临时改一下首页其实是大日历
-                    component: Canlendar,
+                    // 临时改一下首页为了方便，写日程，日程其实是在其他路由的
+                    component: Schedule,
                     name: 'index'
                 }
             ]

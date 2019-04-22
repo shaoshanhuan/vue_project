@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="header_wrap">
         <Layout>
             <Header>
                 <Menu mode="horizontal" theme="dark" active-name="1">
@@ -78,6 +78,9 @@ export default {
 </script>
 
 <style lang="less">
+    .header_wrap{
+        min-width:1100px;
+    }
     .layout{
         border: 1px solid #d7dde4;
         background: #f5f7f9;
