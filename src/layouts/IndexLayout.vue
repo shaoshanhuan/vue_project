@@ -2,7 +2,7 @@
     <div class="header_wrap">
         <Layout>
             <Header>
-                <Menu mode="horizontal" theme="dark" active-name="1">
+                <Menu mode="horizontal" theme="dark" :active-name="$store.state.routerStore.column" @on-select="selectMenuHandler">
                     <div class="layout-logo">
                         <img src="images/logo.png" />
                     </div>
@@ -32,20 +32,23 @@
                         </Poptip>
                     </div>
                     <div class="layout-nav">
-                        <MenuItem name="1">
+                        <MenuItem name="index">
                             <Icon type="ios-navigate"></Icon>
-                            Item 1
+                            首页
                         </MenuItem>
-                        <MenuItem name="2">
+                        <MenuItem name="court">
                             <Icon type="ios-keypad"></Icon>
-                            Item 2
+                            球场
                         </MenuItem>
-                        <MenuItem name="3">
+                        <MenuItem name="match">
                             <Icon type="ios-analytics"></Icon>
-                            Item 3
+                            赛事
+                        </MenuItem>
+                        <MenuItem name="schedule">
+                            <Icon type="ios-analytics"></Icon>
+                            日程
                         </MenuItem>
                     </div>
-                   
                 </Menu>
             </Header>
             <router-view></router-view>
@@ -66,12 +69,16 @@ export default {
             return this.$store.state.me.avatar;
         }
     },
+    // 这里面定义方法
     methods:{
         showModel(){
             this.$changeAvatarModel.show();
         },
         showDrawer(){
             this.$changeProfileDrawer.show();
+        },
+        selectMenuHandler(name){
+            this.$router.push({'name': name});
         }
     }
 };
@@ -80,6 +87,9 @@ export default {
 <style lang="less">
     .header_wrap{
         min-width:1100px;
+    }
+    .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-item:hover, .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-submenu-active, .ivu-menu-dark.ivu-menu-horizontal .ivu-menu-submenu:hover{
+        background:gold;
     }
     .layout{
         border: 1px solid #d7dde4;

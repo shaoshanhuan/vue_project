@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import me from './me.js';
 import profile from './profile.js';
 import schedule from './schedule.js';
+import routerStore from './routerStore.js';
 
 // 使用可预测状态容器
 Vue.use(Vuex);
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     modules : {
         me,
         profile,
-        schedule
+        schedule,
+        routerStore
     }
 });

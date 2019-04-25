@@ -157,6 +157,7 @@ export default {
             }
         },
         calcBasetop(){
+            this.schedules = [];
             // 先把跨周解决掉
             // 好比4月8日开始10天的事情，能够在4月14日，新增一个4天的续的日子。
             for(let i = 0 ; i < this.schedules.length ; i++){
