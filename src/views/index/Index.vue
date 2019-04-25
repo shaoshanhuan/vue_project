@@ -2,7 +2,9 @@
     <div>
         <Content style="padding:20px;">   
             <Card>
-                我是首页
+                <Button v-for="i in 100" :key="i" @click="kanche(i)">
+                    看id为{{1000000 + i}}这个车
+                </Button>
             </Card>
         </Content>
     </div>
@@ -15,6 +17,9 @@ export default {
     methods:{
         showModel(){
             this.$changeProfileDrawer.show();
+        },
+        kanche(i){
+            this.$router.push('/pic/' + (1000000 + i));
         }
     }
 };

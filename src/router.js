@@ -16,6 +16,7 @@ import OverviewOfEvents from './views/overview_of_events/OverviewOfEvents.vue';
 import TourMath from './views/tour_match/TourMath.vue';
 import PointRace from './views/point_race/PointRace.vue';
 import ApplyForACompetition from './views/apply_for_a_competition/ApplyForACompetition.vue';
+import Pic from './views/pic/Pic.vue';
 
 // 路由的实例化
 const router = new VueRouter({
@@ -144,6 +145,11 @@ const router = new VueRouter({
             path: '/login', 
             component: Login, 
             name: 'login' 
+        },
+        {
+            path: '/pic/:id',
+            component: Pic,
+            name: 'pic'
         },
         {
             path: '*',

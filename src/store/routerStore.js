@@ -12,7 +12,6 @@ export default {
             state.columnChinese = columnChinese || subcolumnChinese;
             state.subcolumn = subcolumn;
             state.subcolumnChinese = subcolumnChinese;
-            console.log("我是routerStore",state);
         }
     }
 }
