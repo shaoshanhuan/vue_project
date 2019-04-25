@@ -64,6 +64,9 @@ export default {
     watch : {
         nowidx(v){
             this.page = parseInt(v / 4);
+        },
+        nowalbum(){
+            this.page = parseInt(this.page / 4);
         }
     }
 };

@@ -12,6 +12,7 @@ export default {
         },
         changenowalbum(state, {album}){
             state.nowalbum = album;
+            state.nowidx = 0;
         },
         changenowidx(state, {idx}){
             state.nowidx = idx;
@@ -21,6 +22,8 @@ export default {
         async loadData({commit}, {id}){
             const info = await Vue.prototype.$http.get('/car/' + id).then(data=>data.data);
             commit('changeInfo', {info});
+            commit('changenowalbum', {"album":'view'});
+            commit('changenowidx', {"idx":0});
         }
     }
 };
