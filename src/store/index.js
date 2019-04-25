@@ -5,6 +5,7 @@ import me from './me.js';
 import profile from './profile.js';
 import schedule from './schedule.js';
 import routerStore from './routerStore.js';
+import pic from './pic.js';
 
 // 使用可预测状态容器
 Vue.use(Vuex);
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         me,
         profile,
         schedule,
-        routerStore
+        routerStore,
+        pic
     }
 });
