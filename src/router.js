@@ -171,7 +171,7 @@ router.beforeEach((to, from, next) => {
 });
 
 // 后置守卫，用来写routerStore
-router.afterEach((to, from) => {
+router.afterEach((to) => {
     store.commit('routerStore/changeRouter', 
         {
             column: to.meta.parentCol,

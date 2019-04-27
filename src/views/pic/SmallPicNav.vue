@@ -1,9 +1,11 @@
 <template>
-    <div class="smallpicnav_wrap">
+    <div class="smallpicnav_wrap" v-if="info != null">
         <div class="unit" :style="{'left': -320 * page + 'px'}">
-            <ul v-for="i in totalPage">
+            <ul v-for="i in totalPage" :key="i">
                 <li 
-                    v-for="j in 4" v-if="shu(i,j) < totalCount" 
+                    v-for="j in 4" 
+                    :key="j"
+                    v-show="shu(i,j) < totalCount" 
                     :class="{'cur':shu(i,j) == nowidx}"
                     @click="changeNowidx(shu(i,j))"
                 >
@@ -14,7 +16,7 @@
             </ul>
         </div>
         <div class="page">
-            <div v-for="i in totalPage" :class="{'cur':page == (i - 1)}" @mouseenter="changePage(i - 1)"></div>
+            <div v-for="i in totalPage" :key="i" :class="{'cur':page == (i - 1)}" @mouseenter="changePage(i - 1)"></div>
         </div>
     </div>
 </template>
@@ -25,7 +27,7 @@ export default {
     data(){
         return {
             page : 0
-        }
+        };
     },
     methods: {
         changePage(page) {
@@ -35,19 +37,24 @@ export default {
             return (i - 1) * 4 + (j - 1);
         },
         changeNowidx(idx){
-            this.$store.commit('pic/changenowidx',{idx});
+            this.$store.commit('pic/changenowidx', {idx});
         }
     },
     computed:{
+        info(){
+            return this.$store.state.pic.info;
+        },
         totalPage(){
             if(this.$store.state.pic.info != null){
                 return Math.ceil(this.totalCount / 4);
             }
+            return 0;
         },
         totalCount(){
             if(this.$store.state.pic.info != null){
                 return this.nowalbumimages.length;
             }
+            return 0;
         },
         nowalbum(){
             return this.$store.state.pic.nowalbum;
@@ -56,6 +63,7 @@ export default {
             if(this.$store.state.pic.info != null){
                 return this.$store.state.pic.info.images[this.nowalbum];
             }
+            return [];
         },
         nowidx(){
             return this.$store.state.pic.nowidx;

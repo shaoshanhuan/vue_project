@@ -3,10 +3,8 @@
         <div style="position:relative;height:100%;">
             <div class="big_img_box" v-if="info != null">
                 <img class="myimg" ref="myimg" :src="`http://127.0.0.1:3000/images/carimages_small/${picPathname}`"/>
-                
                 <img ref="loading"  class="loading" src="/images/loading.svg" />
             </div>
-            
         </div>
         <div class="rightpart">
             <CarInfo />
@@ -24,14 +22,12 @@ export default {
     data(){
         return {
             id : 0 
-        }
+        };
     },
     created(){
         this.id = this.$route.params.id;
         // 让store拉取数据
         this.$store.dispatch('pic/loadData', {'id': this.$route.params.id});
-
-        
     },
     components: {
         CarInfo,
@@ -39,16 +35,18 @@ export default {
         SmallPicNav
     },
     updated(){
-        this.$refs.loading.style.display = "block";
+        if(!this.picPathname) return;
+
+        this.$refs.loading.style.display = 'block';
         // 加载大图
         var img = new Image();
         img.src = `http://127.0.0.1:3000/images/carimages/${this.picPathname}`;
         var self = this;
         img.onload = function(){
             self.$refs.myimg.src = img.src;
-            self.$refs.loading.style.display = "none";
+            self.$refs.loading.style.display = 'none';
              
-        }
+        };
     },
     methods:{
         
@@ -61,6 +59,7 @@ export default {
             if(this.$store.state.pic.info != null){
                 return `${this.id}/${this.nowalbum}/${this.nowalbumimages[this.nowidx]}`;
             }
+            return '';
         },
         nowalbum(){
             return this.$store.state.pic.nowalbum;
@@ -69,6 +68,7 @@ export default {
             if(this.$store.state.pic.info != null){
                 return this.$store.state.pic.info.images[this.nowalbum];
             }
+            return [];
         },
         nowidx(){
             return this.$store.state.pic.nowidx;

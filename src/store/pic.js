@@ -20,10 +20,11 @@ export default {
     },
     actions: {
         async loadData({commit}, {id}){
+            commit('changeInfo', {info: null});
             const info = await Vue.prototype.$http.get('/car/' + id).then(data=>data.data);
             commit('changeInfo', {info});
-            commit('changenowalbum', {"album":'view'});
-            commit('changenowidx', {"idx":0});
+            commit('changenowalbum', {'album': 'view'});
+            commit('changenowidx', {'idx': 0});
         }
     }
 };

@@ -7,11 +7,11 @@ export default {
         subcolumnChinese : ''
     },
     mutations: {
-        changeRouter(state,{column,columnChinese,subcolumn,subcolumnChinese}){
+        changeRouter(state, {column, columnChinese, subcolumn, subcolumnChinese}){
             state.column = column || subcolumn;
             state.columnChinese = columnChinese || subcolumnChinese;
             state.subcolumn = subcolumn;
             state.subcolumnChinese = subcolumnChinese;
         }
     }
-}
+};

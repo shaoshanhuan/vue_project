@@ -1,6 +1,5 @@
 import axios from 'axios';
 import url from 'url';
-import Vue from 'vue';
 import router from '../router.js';
 import MOCKAPI from './MOCKAPI.js';
 

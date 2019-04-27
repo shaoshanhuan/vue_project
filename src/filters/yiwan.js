@@ -4,4 +4,4 @@ export default {
             return Math.round(str / 10000);
         });
     }
-}
+};

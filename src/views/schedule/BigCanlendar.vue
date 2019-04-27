@@ -10,8 +10,8 @@
                 <th>五</th>
                 <th>六</th>
             </tr>
-            <tr v-for="i in 6">
-                <td v-for="j in 7" :class="{'gray':dateArr[(i - 1) * 7 + (j - 1)].gray}">
+            <tr v-for="i in 6" :key="i">
+                <td v-for="j in 7" :key="j" :class="{'gray':dateArr[(i - 1) * 7 + (j - 1)].gray}">
                     <!-- 这里就是一个日历小格 -->
                     <!-- 日子 -->
                     <p class="pp1">
@@ -68,14 +68,13 @@ export default {
             // 每个格多款
             gridW : 0,
             baseTop : new Array(42).fill(0)
-        }
+        };
     },
     // 上树
     mounted(){
         // 得到小格的宽度
-        var sampleTd = this.$refs.table.getElementsByTagName("td")[0];
-        this.gridW = parseInt(window.getComputedStyle(sampleTd)["width"]);
-
+        var sampleTd = this.$refs.table.getElementsByTagName('td')[0];
+        this.gridW = parseInt(window.getComputedStyle(sampleTd)['width']);
     },
     computed: {
         year(){
@@ -103,7 +102,7 @@ export default {
             return solarLunar.solar2lunar(y, m, d);
         },
         checkBanXiu(timestamp){
-            for(let i = 0 ; i < this.specialDay.length ; i++){
+            for(let i = 0; i < this.specialDay.length; i++){
                 if(this.specialDay[i].timestamp == timestamp){
                     return this.specialDay[i].thing;
                 }
@@ -126,21 +125,21 @@ export default {
             const prevMonthDateAmount = new Date(year, month - 1, 0).getDate();
         
             // 本月1号星期几，就往数组中塞入几个上个月的尾巴。
-            for(let i = 0 ; i < thisMonthFirstDayDay ; i++){
+            for(let i = 0; i < thisMonthFirstDayDay; i++){
                 this.dateArr.unshift({
-                    "gray" : true,
-                    "date" : prevMonthDateAmount - i,
-                    "month" : month - 1, //人类的月份，不过可能出现0月
-                    "timestamp" : Date.parse(new Date(year, month - 2, prevMonthDateAmount - i))
+                    'gray' : true,
+                    'date' : prevMonthDateAmount - i,
+                    'month' : month - 1, //人类的月份，不过可能出现0月
+                    'timestamp' : Date.parse(new Date(year, month - 2, prevMonthDateAmount - i))
                 });   
             }
             // 塞入本月的
-            for(let i = 1 ; i <= thisMonthDateAmount ; i++){
+            for(let i = 1; i <= thisMonthDateAmount; i++){
                 this.dateArr.push({
-                    "gray" : false,
-                    "date" : i,
-                    "month" : month,
-                    "timestamp" : Date.parse(new Date(year, month - 1, i))
+                    'gray' : false,
+                    'date' : i,
+                    'month' : month,
+                    'timestamp' : Date.parse(new Date(year, month - 1, i))
                 });
             }
             
@@ -149,10 +148,10 @@ export default {
             while(this.dateArr.length < 42){
                 _i ++;
                 this.dateArr.push({
-                    "gray" : true,
-                    "date" : _i,
-                    "month" : month + 1, //人类的月份，不过可能出现13月
-                    "timestamp" : Date.parse(new Date(year, month , _i))
+                    'gray' : true,
+                    'date' : _i,
+                    'month' : month + 1, //人类的月份，不过可能出现13月
+                    'timestamp' : Date.parse(new Date(year, month, _i))
                 });
             }
         },
@@ -160,13 +159,12 @@ export default {
             this.schedules = [];
             // 先把跨周解决掉
             // 好比4月8日开始10天的事情，能够在4月14日，新增一个4天的续的日子。
-            for(let i = 0 ; i < this.schedules.length ; i++){
+            for(let i = 0; i < this.schedules.length; i++){
                 // 找到是第几个格子
-                for(let m = 0; m < this.dateArr.length ; m++){
+                for(let m = 0; m < this.dateArr.length; m++){
                     // 匹配日子
                     if(this.schedules[i].start == this.dateArr[m].timestamp){
                         // 看这是第几行第几个
-                        var row = parseInt(m / 7);
                         var col = m % 7;
                         // 这个格最多能持续的天
                         var maxchixuday = 7 - col;
@@ -177,7 +175,7 @@ export default {
                                 title : this.schedules[i].title,
                                 duration : this.schedules[i].duration - maxchixuday,
                                 type : this.schedules[i].type 
-                            })
+                            });
                         }
                     }
                 } 
@@ -188,14 +186,14 @@ export default {
 
             
             // 遍历schedules数组，
-            for(let i = 0 ; i < this.schedules.length ; i++){
+            for(let i = 0; i < this.schedules.length; i++){
                 // 找到是第几个格子
-                for(let m = 0; m < this.dateArr.length ; m++){
+                for(let m = 0; m < this.dateArr.length; m++){
                     // 匹配日子
                     if(this.schedules[i].start == this.dateArr[m].timestamp){
-                        for(let j = 0 ; j < this.schedules[i].duration ; j++){
-                            var col = m % 7;
-                            if(col + j < 7){
+                        for(let j = 0; j < this.schedules[i].duration; j++){
+                            var _col = m % 7;
+                            if(_col + j < 7){
                                 this.baseTop[m + j] ++;
                             }
                         }
@@ -207,7 +205,7 @@ export default {
         // idx表示小格的小序号0~41
         showBBbar(timestamp, idx){
             var count = 0;
-            for(let i = 0 ; i < this.schedules.length ; i++){
+            for(let i = 0; i < this.schedules.length; i++){
                 if(this.schedules[i].start == timestamp){
                     // 如果现在要的idx和计数器一样了，就说明现在要这条了
                     // （vue的idx从1开始数，所以这里count要加1之后比较）
@@ -215,7 +213,7 @@ export default {
                     if(count == idx){
                         var d = this.schedules[i].duration;
                         if(d >= 7 - ((idx - 1) % 7)){
-                            d = 7 - ((idx - 1) % 7)
+                            d = 7 - ((idx - 1) % 7);
                         }
                         return {
                             ...this.schedules[i],
@@ -228,7 +226,7 @@ export default {
         },
         howManyThingStartInthisDay(timestamp){
             var count = 0;
-            for(let i = 0 ; i < this.schedules.length ; i++){
+            for(let i = 0; i < this.schedules.length; i++){
                 if(this.schedules[i].start == timestamp){
                     count ++;
                 }

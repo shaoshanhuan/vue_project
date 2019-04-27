@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         changeNowAlbum(album){
-            this.$store.commit('pic/changenowalbum',{album});
+            this.$store.commit('pic/changenowalbum', {album});
         }
     }
 };
