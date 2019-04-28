@@ -39,7 +39,6 @@ export default {
             var self = this;
             img.onload = function(){
                 // 图片加载完毕
-                console.log("1")
                 self.$refs.spin.style.display = "none";
             }
         }
