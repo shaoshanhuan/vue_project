@@ -10,6 +10,7 @@ import changeAvatarModalControl from './bus/changeAvatarModalControl.js';
 import changeProfileControl from './bus/changeProfileControl.js';
 import yiwan_filter from './filters/yiwan.js';
 import riqi_filter from './filters/riqi.js';
+import ShowLoadingImage from './components/show-loading-image/show-loading-image.vue';
 
 // Vue-Cli自带的配置，不用管
 Vue.config.productionTip = false;
@@ -22,6 +23,9 @@ Vue.use(iView);
 Vue.use(changeAvatarModalControl);
 // 使用用户资料管理插件抽屉（自己编写的）
 Vue.use(changeProfileControl);
+// 使用全局性质的图片loading小组件
+Vue.component('ShowLoadingImage',ShowLoadingImage);
+
 // 定义过滤器
 Vue.use(yiwan_filter);
 Vue.use(riqi_filter);
