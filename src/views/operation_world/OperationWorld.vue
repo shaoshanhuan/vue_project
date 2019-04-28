@@ -1,10 +1,60 @@
 <template>
     <div>
-        <div class="table_box">
-            <div class="righttool">
-                <Button type="primary" shape="circle" icon="ios-settings" @click="isShowSettingColsModal = true"></Button>
-            </div>
+        <!-- 筛选器 -->
+        <Row>
+            <Col :span="3">
+                排放标准：
+            </Col>
+            <Col :span="21">
+                <BMuti k="exhaust" :options="['国一','国二','国三','国四','国五']"/>
+            </Col>
+        </Row>
+        <Row>
+            <Col :span="3">
+                颜色：
+            </Col>
+            <Col :span="21">
+                <BMuti k="color" :options="['红','黄','橙','灰','银','银灰','香槟','咖啡','黑','白']"/>
+            </Col>
+        </Row>
+        <Row>
+            <Col :span="3">
+                变速箱：
+            </Col>
+            <Col :span="21">
+                <BMuti k="gearbox" :options="['手动','自动','手自一体']"/>
+            </Col>
+        </Row>
+        <Row>
+            <Col :span="3">
+                燃料：
+            </Col>
+            <Col :span="21">
+                <BMuti k="fuel" :options="['汽油','柴油','纯电动','油电混合']"/>
+            </Col>
+        </Row>
+        <Row>
+            <Col :span="3">
+                购买日期：
+            </Col>
+            <Col :span="21">
+                <BDate k="buydate" />
+            </Col>
+        </Row>
 
+        <div class="lefttool">
+            <RadioGroup v-model="view" type="button">
+                <Radio label="grid">网格视图</Radio>
+                <Radio label="table">表格视图</Radio>
+            </RadioGroup>
+        </div>
+        <div class="righttool">
+            <Button type="primary" shape="circle" icon="ios-settings" @click="isShowSettingColsModal = true"></Button>
+        </div>
+        
+        <div class="clfix"></div>
+        <!-- 表格 -->
+        <div class="table_box" >
             <!-- 弹出层 -->
             <Modal
                 v-model="isShowSettingColsModal"
@@ -16,12 +66,12 @@
             </Modal>
             <!-- 弹出层 -->
 
-            <div class="clfix"></div>
             <!-- 表格 -->
             <!-- 列定义要的是函数的返回结果 -->
             <Table 
                 :columns="getColConfigByMyColsFromAllCols()" 
                 :data="result"
+                v-if="view == 'table'"
             ></Table>
             <div class="sp" ref="sp">
                 <Spin fix>
@@ -30,6 +80,8 @@
                 </Spin>
             </div>
         </div>
+        
+        <GridView v-if="view == 'grid'" :data="result"/>
             
 
         <div class="h10"></div>
@@ -48,6 +100,10 @@
 import SettingColsModal from './SettingColsModal.vue';
 // 引入仓库
 import allcols from './allcols.js';
+// 引入类型
+import BMuti from './BMuti.vue';
+import BDate from './BDate.vue';
+import GridView from './GridView.vue';
 
 var o = null;
 export default {
@@ -57,11 +113,16 @@ export default {
             // 是否显示弹出层
             isShowSettingColsModal : false,
             // 列配置
-            cols: []
+            cols: [],
+            // 当前视图形式
+            view: 'grid'
         }
     },
     components: {
-        SettingColsModal
+        SettingColsModal,
+        BMuti,
+        BDate,
+        GridView
     },
     // 生命周期
     created(){
@@ -148,5 +209,7 @@ export default {
     .clfix{
         clear:both;
     }
-     
+    .ivu-row{
+        height: 30px;
+    }
 </style>

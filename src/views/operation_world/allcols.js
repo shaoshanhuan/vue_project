@@ -1,4 +1,5 @@
 import moment from 'moment';
+import router from '../../router.js';
 
 export default {
     avatar : {
@@ -8,7 +9,7 @@ export default {
             return h('div', {
                 on: {
                     click(){
-                        self.$router.push({
+                        router.push({
                             'name': 'pic',
                             'params': {
                                 'id': row.id

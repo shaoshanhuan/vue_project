@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "echarts": "^4.2.1",
     "iview": "^3.4.0",
     "moment": "^2.24.0",
     "querystring": "^0.2.0",
